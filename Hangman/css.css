@@ -125,3 +125,7 @@ main {
    letter-spacing: 20px;
    text-transform: uppercase;
 }
+.message{
+   font-size: 20px;
+   font-weight: bold;
+}

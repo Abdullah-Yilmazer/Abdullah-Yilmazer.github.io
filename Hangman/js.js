@@ -1,23 +1,29 @@
 // Kelimenin asıl hali ve tahmin edilen harf sayısı
-const secretWord = "ankara";
+var secretWord = "";
 let displayWord = "";
-let wordLenght = Math.floor(6 + (4 * Math.random()));
-console.log(wordLenght);
+let wordLength = Math.floor(6 + (4 * Math.random()));
 let remainingAttempts = 6;
 const guessedLetters = new Set();
-for (let i = 0; i < wordLenght; i++) {
+for (let i = 0; i < wordLength; i++) {
    displayWord += "_";
 }
 
 
-//// GET İsteği
-fetch(`https://random-word-api.herokuapp.com/word?length=`)
-   .then((response) => response.json()) //parse json data
-   .then(function (todos) {
-      todos.forEach((todo) => {
-         console.log(todo.title); 
-      });
-   });
+// Oyunu başlatma işlemini async bir işlev içinde tanımlayın
+async function startHangmanGame() {
+   try {
+      const response = await fetch(`https://random-word-api.herokuapp.com/word?length=${wordLength}`);
+      const todos = await response.json();
+      secretWord = todos[0];
+      // console.log(todos[0]);
+      // console.log("Kelime:", secretWord);
+      // console.log("uzunluk:", wordLength);
+      wordDisplay.textContent = displayWord; // Kelimeyi görüntüleme
+   } catch (error) {
+      console.error("Hata oluştu:", error);
+   }
+}
+
 
 // HTML elementlerini seçme
 const wordDisplay = document.querySelector(".word");
@@ -85,6 +91,6 @@ document.addEventListener("keyup", function (event) {
    const letter = event.key.toLowerCase();
    if (/^[a-z]$/.test(letter)) {
       guessLetter(letter);
-      console.log(letter);
    }
 });
+startHangmanGame();
