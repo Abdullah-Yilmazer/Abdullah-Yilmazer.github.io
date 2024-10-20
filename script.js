@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
                           <h2>${repo.name}</h2>
                           <p>${repo.description || "Açıklama yok."}</p>
                           <a href="${repo.html_url}" target="_blank">GitHub'da Gör</a>
-                          <a href="./demo.html?repo=${repo.name}" target="_blank">demoyu Gör</a>
+                          <a href="./${repo.name}" target="_blank">demoyu Gör</a>
                           `;
               } else {
                 projectCard.innerHTML += `<img src="${imgUrl}" alt="Screenshot">`;
